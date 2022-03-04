@@ -1,6 +1,7 @@
-import {CityType} from "../../2test/02__02";
-import {demolishHousesOnStreet, getBuildingsWithStaffCountGreaterthen} from "./4-2";
-import exp from "constants";
+import {CityType} from "../2test/02__02";
+import {createMessages, getStreetsTitleOfGovernmentBuildings, getStreetsTitleOfHouses} from "./05-02";
+
+
 
 
 let city: CityType;
@@ -59,18 +60,31 @@ beforeEach(() => {
     }
 })
 
-test("House should be destroyed", () => {
-demolishHousesOnStreet(city, "Happy street")
+test("List of streets titles of goverment buildings", () => {
+    let streetsNames = getStreetsTitleOfGovernmentBuildings(
+        city.governmentBuildings)
 
+    expect(streetsNames.length).toBe(2)
+    expect(streetsNames[0]).toBe("Central Str")
+    expect(streetsNames[1]).toBe("South Str")
 
-
-    expect(city.houses.length).toBe(1)
-    expect(city.houses[0].id).toBe(1)
 })
 
-test("Buildings with correct staff count", () => {
-let buildings = getBuildingsWithStaffCountGreaterthen(city.governmentBuildings, 500)
+test("List of streets titles0", ()=>{
+    let streets = getStreetsTitleOfHouses(city.houses)
 
-    expect(buildings.length).toBe(1)
-    expect(buildings[0].type).toBe("FIRE-STATION")
+    expect(streets.length).toBe(3)
+    expect(streets[0]).toBe("White street")
+    expect(streets[1]).toBe("Happy street")
+    expect(streets[2]).toBe("Happy street")
+
+})
+
+test("create greeting message for streets", () => {
+    let messages = createMessages(city.houses)
+
+    expect(messages.length).toBe(3)
+    expect(messages[0]).toBe("Hello guys from White street")
+    expect(messages[1]).toBe("Hello guys from Happy street")
+    expect(messages[2]).toBe("Hello guys from Happy street")
 })
