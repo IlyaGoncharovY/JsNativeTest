@@ -1,6 +1,5 @@
 import {CityType} from "../2test/02__02";
 import {addMoneyToBudget, repairHouse, toFireStaff, toHireStuff} from "./03";
-import exp from "constants";
 
 
 let city: CityType;
